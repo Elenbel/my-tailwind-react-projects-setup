@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import ThemeProvider, { ThemeContext } from './ThemeProvider/ThemeProvider';
+import Button from "./components/Button/Button";
 
+import React, { useContext, useState, useEffect, useRef } from "react";
 function App() {
+  const { isDarkMode } = useContext(ThemeContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <main className={`App min-h-screen relative ${isDarkMode ? "bg-custom-blue" : "bg-gray-50"}`}>
+      <header className="App-header sm:px-4">
+          <Button/>
       </header>
-    </div>
+    </main>
   );
 }
 
-export default App;
+function AppWrapper() {
+  return (
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+  );
+}
+
+export default AppWrapper;
